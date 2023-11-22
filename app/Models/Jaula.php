@@ -12,4 +12,10 @@ class Jaula extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+    public function animal(){
+        return $this->belongsTo(Animal::class);
+    }
+    public function sensor_jaulas(){
+        return $this->hasMany(Sensor_Jaula::class);
+    }
 }
