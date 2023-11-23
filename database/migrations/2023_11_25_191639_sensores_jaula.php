@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('Jaulas', function (Blueprint $table) {
+        Schema::create('Sensores_Jaula', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_user');
-            $table->foreing('id_user')->references('id')->on('users');
-            $table->unsignedBigInteger('id_animal');
-            $table->foreing('id_animal')->references('id')->on('Animales');
+            $table->unsignedBigInteger('id_sensor');
+            $table->foreign('id_sensor')->references('id')->on('Sensores');
+            $table->unsignedBigInteger('id_jaula');
+            $table->foreign('id_jaula')->references('id')->on('Jaulas');
         });
     }
 

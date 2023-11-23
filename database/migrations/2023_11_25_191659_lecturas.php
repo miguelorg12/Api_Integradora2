@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('Lecturas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_sensor_jaula');
-            $table->foreing('id_sensor_jaula')->references('id')->on('Sensores_Jaula');
+            $table->foreign('id_sensor_jaula')->references('id')->on('Sensores_Jaula');
             $table->string('Valor');
             $table->timestamp('Fecha_Hora');
         });

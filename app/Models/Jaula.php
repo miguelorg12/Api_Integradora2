@@ -18,4 +18,5 @@ class Jaula extends Model
     public function sensor_jaulas(){
         return $this->hasMany(Sensor_Jaula::class);
     }
+    
 }
