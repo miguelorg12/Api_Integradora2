@@ -27,14 +27,14 @@ class AuthController extends Controller
         $user -> email= $request->email;
         $user -> ApP = $request->ApP;
         $user -> ApM = $request->ApM;
-        $user -> password = Hash::make($request->password); 
+        $user -> password = Hash::make($request->password);
         $user->save();
         if(!$token = Auth::attempt($request->only('email','password'))){
             return response()->json(['msg' => 'Error al crear el usuario'], 401);
         }
         return response()->json(['msg' => 'Usuario creado con exito','token' => $this->respondWithToken($token),'user'=>$user], 200);
     }
-    
+
     public function respondWithToken($token){
         return $token;
     }
