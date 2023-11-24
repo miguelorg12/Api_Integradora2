@@ -37,8 +37,8 @@ Route::group([
     //Rutas de usuarios
 
     Route::get('index', [UserController::class, 'index']);
-    Route::get('show/{id}', [UserController::class, 'show']);
+    Route::get('show/{id}', [UserController::class, 'show'])->where('id', '[0-9]+');
     Route::post('store', [UserController::class, 'store']);
-    Route::put('update/{id}', [UserController::class, 'update']);
-    Route::delete('destroy/{id}', [UserController::class, 'destroy']);
+    Route::put('update/{id}', [UserController::class, 'update'])->where('id', '[0-9]+');
+    Route::delete('destroy/{id}', [UserController::class, 'destroy']->where('id', '[0-9]+'));
 });
