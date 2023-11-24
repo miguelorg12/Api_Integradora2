@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,4 +33,12 @@ Route::group([
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::post('me', [AuthController::class, 'me']);
     Route::post('register', [AuthController::class, 'register']);
+    
+    //Rutas de usuarios
+
+    Route::get('index', [UserController::class, 'index']);
+    Route::get('show/{id}', [UserController::class, 'show']);
+    Route::post('store', [UserController::class, 'store']);
+    Route::put('update/{id}', [UserController::class, 'update']);
+    Route::delete('destroy/{id}', [UserController::class, 'destroy']);
 });
