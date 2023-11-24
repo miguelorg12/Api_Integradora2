@@ -27,18 +27,16 @@ Route::group([
     'prefix' => 'auth'
 
 ], function ($router) {
-
     Route::post('login', [AuthController::class, 'login']);
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::post('me', [AuthController::class, 'me']);
     Route::post('register', [AuthController::class, 'register']);
-    
     //Rutas de usuarios
-
     Route::get('index', [UserController::class, 'index']);
     Route::get('show/{id}', [UserController::class, 'show'])->where('id', '[0-9]+');
     Route::post('store', [UserController::class, 'store']);
     Route::put('update/{id}', [UserController::class, 'update'])->where('id', '[0-9]+');
-    Route::delete('destroy/{id}', [UserController::class, 'destroy']->where('id', '[0-9]+'));
+    Route::delete('destroy/{id}', [UserController::class, 'destroy'])->where('id', '[0-9]+');
 });
+

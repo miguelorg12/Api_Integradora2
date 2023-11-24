@@ -31,6 +31,18 @@ class AuthController extends Controller
         return $this->respondWithToken($token);
     }
 
+    public function me(){
+        return response()->json(auth()->user());
+    }
+
+    public function logout(){
+        auth()->logout();
+        return response()->json(['msg' => 'Sesion cerrada con exito'], 200);
+    }
+
+    public function refresh(){
+        return $this->respondWithToken(Auth::refresh());
+    }
     
     public function register(Request $request){
         $validate = Validator::make($request->all(), [
@@ -62,8 +74,5 @@ class AuthController extends Controller
             'token_type' => 'bearer',
             'expires_in' => Auth::factory()->getTTL() * 60,
         ]);
-    }
-    public function refresh(){
-        return $this->respondWithToken(Auth::refresh());
     }
 }
