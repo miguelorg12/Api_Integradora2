@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('Animales', function (Blueprint $table) {
             $table->id();
             $table->string('Nombre');
+            
         });
     }
 

@@ -50,7 +50,7 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users,email|max:255',
             'ApP' => 'required|string|max:255|min:3',
             'ApM' => 'required|string|max:255|min:3',
-            'password'=> 'required|string|confirmed'
+            'password'=> 'required|string|confirmed|min:8'
         ]);
         if($validate->fails()){
             return response()->json(['errors' => $validate->errors()], 400);

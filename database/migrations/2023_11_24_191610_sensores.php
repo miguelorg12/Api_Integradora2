@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('Sensores', function (Blueprint $table) {
             $table->id();
             $table->string('Name');
+            $table->integer('sensor_id');
             $table->string('Unidad');
         });
     }

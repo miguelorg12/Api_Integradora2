@@ -9,6 +9,7 @@ class Jaula extends Model
 {
     use HasFactory;
     protected $table = 'Jaulas';
+    public $timestamps = false;
     public function user(){
         return $this->belongsTo(User::class);
     }

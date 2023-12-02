@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -13,6 +14,7 @@ class UserController extends Controller
     {
         $this->middleware('auth:api', ['except' => []]);
     }
+    
     public function index(){
         $users = User::all();
         return response()->json(['users'=>$users], 200);
@@ -91,6 +93,10 @@ class UserController extends Controller
         }else{
             return response()->json(['msg'=>'No se encontro el usuario'], 404);
         }
+    }
+    public function mostrarid(){
+        $user = Auth::user();
+        return response()->json(['id'=> $user -> id], 200);
     }
 
 }
