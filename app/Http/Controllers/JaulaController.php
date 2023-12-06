@@ -12,6 +12,9 @@ use App\Http\Controllers\SensoresController;
 
 class JaulaController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth:api', ['except' => []]);
+    }
     public function store(Request $request){
         $validate = Validator::make($request -> all(),[
             'name' => 'required|string|max:255|min:3',
