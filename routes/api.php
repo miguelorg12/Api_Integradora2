@@ -3,6 +3,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SensoresController;
+use App\Http\Controllers\AnimalController;
 use App\Http\Controllers\Adafruit\AdafruitController;
 use App\Http\Controllers\JaulaController;
 /*
@@ -31,11 +33,6 @@ Route::group([
 });
 //Usuarios
 Route::prefix('v1')->group(function () {
-    /*Route::get('users', [UserController::class, 'index']);
-    Route::get('users/{id}',[UserController::class, 'show'])->where('id', '[0-9]+');
-    Route::post('users', [UserController::class, 'store']);
-    Route::put('users/{id}', [UserController::class, 'update'])->where('id', '[0-9]+');
-    Route::delete('users/{id}', [UserController::class, 'destroy'])->where('id', '[0-9]+');*/
     Route::get('users', [UserController::class, 'mostrarid']);
 });
 //Sensores adafruit
@@ -52,6 +49,21 @@ Route::prefix('v1')->group(function () {
 Route::prefix('v1')->group(function () {
     Route::post('jaula', [JaulaController::class, 'store']);
     Route::get('jaula/{id}',[JaulaController::class, 'show'])->where('id', '[0-9]+');
-    Route::get('jaula/mostrarid', [JaulaController::class, 'mostrarid']);
+    Route::get('jaula/user/{id}',[JaulaController::class, 'showperUser'])->where('id', '[0-9]+');
 });
 
+//Sensores
+/*Route::prefix('v1')->group(function () {
+    Route::post('sensores/temperatura', [SensoresController::class, 'storeTemperatura']);
+    Route::post('sensores/humedad', [SensoresController::class, 'storeHumedad']);
+    Route::post('sensores/luz', [SensoresController::class, 'storeLuz']);
+    Route::post('sensores/movimiento', [SensoresController::class, 'storeMovimiento']);
+    Route::post('sensores/ultrasonico', [SensoresController::class, 'storeUltrasonico']);
+    Route::post('sensores/acelerometro', [SensoresController::class, 'storeAcelerometro']);
+    Route::post('sensores/infrarojo', [SensoresController::class, 'storeInfrarojo']);
+});*/
+
+//Animales
+Route::prefix('v1')->group(function () {
+    Route::get('animales', [AnimalController::class, 'index']);
+});

@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Sensor_Jaula extends Model
 {
     use HasFactory;
-    protected $table = 'Sensores_Jaulas';
+    protected $table = 'Sensores_Jaula';
+    public $timestamps = false;
     public function jaula(){
         return $this->belongsTo(Jaula::class);
     }

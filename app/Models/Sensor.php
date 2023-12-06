@@ -9,6 +9,7 @@ class Sensor extends Model
 {
     use HasFactory;
     protected $table = 'Sensores';
+    public $timestamps = false;
     public function sensores_jaulas(){
         return $this->hasMany(Sensor_Jaula::class);
     }

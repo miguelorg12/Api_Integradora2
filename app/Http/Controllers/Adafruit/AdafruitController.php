@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Http;
 
 class AdafruitController extends Controller
 {
+    public string $key = 'aio_lTPe292HT1a1HOc8WeaeFcc2cQwU';
     public function __construct()
     {
         $this->middleware('auth:api', ['except' => []]);
@@ -16,7 +17,7 @@ class AdafruitController extends Controller
 
     public function adafruitTemperatura(){
         $response = Http::withHeaders([
-            'X-AIO-Key' => 'aio_RpAd35FAYC339Fa45QX3b253oBfW'
+            'X-AIO-Key' => "{$this->key}"
         ])->get('https://io.adafruit.com/api/v2/Emith14/feeds/temperatura');
 
         if($response->ok()){
@@ -30,7 +31,7 @@ class AdafruitController extends Controller
 
     public function adafruitHumedad(){
         $response = Http::withHeaders([
-            'X-AIO-Key' => 'aio_RpAd35FAYC339Fa45QX3b253oBfW'
+            'X-AIO-Key' => "{$this->key}"
         ])->get('https://io.adafruit.com/api/v2/Emith14/feeds/humedad');
 
         if($response->ok()){
@@ -44,7 +45,7 @@ class AdafruitController extends Controller
 
     public function adafruitLuz(){
         $response = Http::withHeaders([
-            'X-AIO-Key' => 'aio_RpAd35FAYC339Fa45QX3b253oBfW'
+            'X-AIO-Key' => "{$this->key}"
         ])->get('https://io.adafruit.com/api/v2/Emith14/feeds/luzsensor');
 
         if($response->ok()){
@@ -58,7 +59,7 @@ class AdafruitController extends Controller
 
     public function adafruitMovimiento(){
         $response = Http::withHeaders([
-            'X-AIO-Key' => 'aio_RpAd35FAYC339Fa45QX3b253oBfW'
+            'X-AIO-Key' => "{$this->key}"
         ])->get('https://io.adafruit.com/api/v2/Emith14/feeds/movimien');
 
         if($response->ok()){
@@ -72,7 +73,7 @@ class AdafruitController extends Controller
 
     public function adafruitInfrarojo(){
         $response = Http::withHeaders([
-            'X-AIO-Key' => 'aio_RpAd35FAYC339Fa45QX3b253oBfW'
+            'X-AIO-Key' => "{$this->key}"
         ])->get('https://io.adafruit.com/api/v2/Emith14/feeds/infrarojo');
 
         if($response->ok()){
@@ -86,7 +87,7 @@ class AdafruitController extends Controller
 
     public function adafruitAcelerometro(){
         $response = Http::withHeaders([
-            'X-AIO-Key' => 'aio_RpAd35FAYC339Fa45QX3b253oBfW'
+            'X-AIO-Key' => "{$this->key}"
         ])->get('https://io.adafruit.com/api/v2/Emith14/feeds/acelerometro');
 
         if($response->ok()){
@@ -100,7 +101,7 @@ class AdafruitController extends Controller
 
     public function adafruitUltrasonico(){
         $response = Http::withHeaders([
-            'X-AIO-Key' => 'aio_RpAd35FAYC339Fa45QX3b253oBfW'
+            'X-AIO-Key' => "{$this->key}"
         ])->get('https://io.adafruit.com/api/v2/Emith14/feeds/ultrasonico');
 
         if($response->ok()){

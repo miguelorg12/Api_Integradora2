@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_sensor_jaula');
             $table->foreign('id_sensor_jaula')->references('id')->on('Sensores_Jaula');
-            $table->string('Valor');
-            $table->timestamp('Fecha_Hora');
+            $table->integer('Valor');
+            $table->timestamp('Fecha_Hora')->useCurrent();
         });
     }
 
