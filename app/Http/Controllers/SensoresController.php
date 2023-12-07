@@ -14,134 +14,46 @@ use Illuminate\Support\Facades\DB;
 class SensoresController extends Controller
 {
     public function storeTemperatura(){
-        $adafruit = new AdafruitController();
-        $jsonresponse = $adafruit->adafruitTemperatura();
-        $data = $jsonresponse -> getData(true);
-        $existingsensor = Sensor::where('sensor_id', $data['id'])->exists();
-        if($existingsensor){
-            $newSensorId = rand(1000000, 9999999);
+        $sensor = Sensor::where('Name', 'Temperatura')->first();
+        if($sensor){
+        return $sensor->id;
         }
-        else{
-            $newSensorId = $data['id'];
-        }
-        $sensor = new Sensor();
-        $sensor -> Name = "Temperatura";
-        $sensor -> unidad = "°C";
-        $sensor -> sensor_id = $newSensorId;
-        $sensor -> save();
-        return $sensor -> id;
     }
     public function storeHumedad(){
-        $adafruit = new AdafruitController();
-        $jsonresponse = $adafruit->adafruitHumedad();
-        $data = $jsonresponse -> getData(true);
-        $existingsensor = Sensor::where('sensor_id', $data['id'])->exists();
-        if($existingsensor){
-            $newSensorId = rand(1000000, 9999999);
+        $sensor = Sensor::where('Name', 'Humedad')->first();
+        if($sensor){
+        return $sensor->id;
         }
-        else{
-            $newSensorId = $data['id'];
-        }
-        $sensor = new Sensor();
-        $sensor -> Name = "Humedad";
-        $sensor -> unidad = "%";
-        $sensor -> sensor_id = $newSensorId;
-        $sensor -> save();
-        return $sensor -> id;
     }
     public function storeLuz(){
-        $adafruit = new AdafruitController();
-        $jsonresponse = $adafruit->adafruitLuz();
-        $data = $jsonresponse -> getData(true);
-        $existingsensor = Sensor::where('sensor_id', $data['id'])->exists();
-        if($existingsensor){
-            $newSensorId = rand(1000000, 9999999);
+        $sensor = Sensor::where('Name', 'Luz')->first();
+        if($sensor){
+        return $sensor->id;
         }
-        else{
-            $newSensorId = $data['id'];
-        }
-        $sensor = new Sensor();
-        $sensor -> Name = "Luz";
-        $sensor -> unidad = "raw";
-        $sensor -> sensor_id = $newSensorId;
-        $sensor -> save();
-        return $sensor -> id;
     }
 
     public function storeMovimiento(){
-        $adafruit = new AdafruitController();
-        $jsonresponse = $adafruit->adafruitMovimiento();
-        $data = $jsonresponse -> getData(true);
-        $existingsensor = Sensor::where('sensor_id', $data['id'])->exists();
-        if($existingsensor){
-            $newSensorId = rand(1000000, 9999999);
+        $sensor = Sensor::where('Name', 'Movimiento')->first();
+        if($sensor){
+        return $sensor->id;
         }
-        else{
-            $newSensorId = $data['id'];
-        }
-
-        $sensor = new Sensor();
-        $sensor -> Name = "Movimiento";
-        $sensor -> unidad = "boolean";
-        $sensor -> sensor_id = $newSensorId;
-        $sensor -> save();
-        return $sensor -> id;
     }
     public function storeUltrasonico(){
-        $adafruit = new AdafruitController();
-        $jsonresponse = $adafruit->adafruitUltrasonico(); //
-        $data = $jsonresponse -> getData(true);
-        $existingsensor = Sensor::where('sensor_id', $data['id'])->exists();
-        if($existingsensor){
-            $newSensorId = rand(1000000, 9999999);
+        $sensor = Sensor::where('Name', 'Ultrasonico')->first();
+        if($sensor){
+        return $sensor->id;
         }
-        else{
-            $newSensorId = $data['id'];
-        }
-
-        $sensor = new Sensor();
-        $sensor -> Name = "Ultrasonico";
-        $sensor -> unidad = "cm";
-        $sensor -> sensor_id = $newSensorId;
-        $sensor -> save();
-        return $sensor -> id;
     }
-    /* public function storeAcelerometro(){
-        $adafruit = new AdafruitController();
-        $jsonresponse = $adafruit->adafruitAcelerometro();
-        $data = $jsonresponse -> getData(true);
-        $existingsensor = Sensor::where('sensor_id', $data['id'])->exists();
-        if($existingsensor){
-            $newSensorId = rand(1000000, 9999999);
+    public function storeAcelerometro(){
+        $sensor = Sensor::where('Name', 'Acelerometro')->first();
+        if($sensor){
+        return $sensor->id;
         }
-        else{
-            $newSensorId = $data['id'];
-        }
-
-        $sensor = new Sensor();
-        $sensor -> Name = "Acelerometro";
-        $sensor -> unidad = "rpm";
-        $sensor -> sensor_id = $newSensorId;
-        $sensor -> save();
-        return $sensor -> id;
     }
-
     public function storeInfrarojo(){
-        $adafruit = new AdafruitController();
-        $jsonresponse = $adafruit->adafruitInfrarojo();
-        $data = $jsonresponse -> getData(true);
-        $existingsensor = Sensor::where('sensor_id', $data['id'])->exists();
-        if($existingsensor){
-            $newSensorId = rand(1000000, 9999999);
+        $sensor = Sensor::where('Name', 'Infrarojo')->first();
+        if($sensor){
+        return $sensor->id;
         }
-        else{
-            $newSensorId = $data['id'];
-        }
-        $sensor = new Sensor();
-        $sensor -> Name = "Infrarojo";
-        $sensor -> unidad = "cm";
-        $sensor -> sensor_id = $newSensorId;
-        $sensor -> save();
-        return $sensor -> id;
-    }*/
+    }
 }

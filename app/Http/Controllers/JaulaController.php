@@ -33,8 +33,10 @@ class JaulaController extends Controller
         $sensor -> storeTemperatura(),
         $sensor -> storeHumedad(),
         $sensor -> storeLuz(),
+        $sensor -> storeAcelerometro(),
         $sensor -> storeMovimiento(),
         $sensor -> storeUltrasonico(),
+        $sensor -> storeInfrarojo(),
         ];
         $jaula -> save();
         foreach($sensores as $sensor){

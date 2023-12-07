@@ -37,13 +37,13 @@ Route::prefix('v1')->group(function () {
 });
 //Sensores adafruit
 Route::prefix('v1')->group(function () {
-    Route::get('http/sensortemperatura', [AdafruitController::class, 'adafruitTemperatura']);
-    Route::get('http/sensorhumedad', [AdafruitController::class, 'adafruitHumedad']);
-    Route::get('http/sensorluz', [AdafruitController::class, 'adafruitLuz']);
-    Route::get('http/sensormovimiento', [AdafruitController::class, 'adafruitMovimiento']);
-    Route::get('http/sensorultrasonico', [AdafruitController::class, 'adafruitUltrasonico']);
-    Route::get('http/sensoracelerometro', [AdafruitController::class, 'adafruitAcelerometro']);
-    Route::get('http/sensorinfrarojo', [AdafruitController::class, 'adafruitInfrarojo']);
+    Route::get('http/sensortemperatura/{id_jaula}', [AdafruitController::class, 'adafruitTemperatura'])->where('id_jaula', '[0-9]+');
+    Route::get('http/sensorhumedad/{id_jaula}', [AdafruitController::class, 'adafruitHumedad'])->where('id_jaula', '[0-9]+');
+    Route::get('http/sensorluz/{id_jaula}', [AdafruitController::class, 'adafruitLuz'])->where('id_jaula', '[0-9]+');
+    Route::get('http/sensormovimiento/{id_jaula}', [AdafruitController::class, 'adafruitMovimiento'])->where('id_jaula', '[0-9]+');
+    Route::get('http/sensorultrasonico/{id_jaula}', [AdafruitController::class, 'adafruitUltrasonico'])->where('id_jaula', '[0-9]+');
+    Route::get('http/sensoracelerometro/{id_jaula}', [AdafruitController::class, 'adafruitAcelerometro'])->where('id_jaula', '[0-9]+');
+    Route::get('http/sensorinfrarojo/{id_jaula}', [AdafruitController::class, 'adafruitInfrarojo'])->where('id_jaula', '[0-9]+');
 });
 //Jaulas
 Route::prefix('v1')->group(function () {

@@ -9,6 +9,7 @@ class Lectura extends Model
 {
     use HasFactory;
     protected $table = 'Lecturas';
+    public $timestamps = false;
     public function sensor_jaula(){
         return $this->belongsTo(Sensor_Jaula::class);
     }
