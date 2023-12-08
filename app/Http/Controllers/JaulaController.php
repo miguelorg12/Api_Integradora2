@@ -19,7 +19,6 @@ class JaulaController extends Controller
     public function store(Request $request){
         $validate = Validator::make($request -> all(),[
             'name' => 'required|string|max:255|min:3',
-            'id_user' => 'required|integer',
             'id_animal' => 'required|integer'
         ]);
         if($validate -> fails()){
@@ -27,7 +26,7 @@ class JaulaController extends Controller
         }
         $jaula = new Jaula();
         $jaula -> name = $request->name;
-        $jaula -> id_user = $request->id_user;
+        $jaula -> id_user = Auth::user()->id;
         $jaula -> id_animal = $request->id_animal;
         $sensor = new SensoresController();
         $sensores = [
