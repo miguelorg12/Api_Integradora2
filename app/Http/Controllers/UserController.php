@@ -50,26 +50,22 @@ class UserController extends Controller
         return response()->json(['user'=>$user], 201);
     }
 
-    public function update(Request $request, $id){
-        $user = User::find($id);
+    public function update(Request $request){
+        $user = Auth::user();
         if($user){
             $validate = Validator::make($request->all(), [
                 'name' => 'required|string|max:255|min:3',
-                'email' => 'required|email|unique:users,email,'.$id.'|max:255',
-                'ApP' => 'required|string|max:255|min:3',
-                'ApM' => 'required|string|max:255|min:3',
-                'password'=> 'required|string|confirmed'
+                'ApP' => 'string|max:255|min:3',
+                'ApM' => 'string|max:255|min:3'
             ]);
             if($validate->fails()){
                 return response()->json(['errors' => $validate->errors()], 400);
             }
-            $user -> name = $request->get('name', $user->name);
-            $user -> email = $request->get('email', $user->email);
+            $user -> name = $request-> name;
             $user -> ApP = $request->get('ApP', $user->ApP);
             $user -> ApM = $request->get('ApM', $user->ApM);
-            $user -> password = Hash::make($request->password);
             $user -> save();
-            return response()->json(['user'=>$user], 200);
+            return response()->json(['Se actualizo el usuario con exito', 'data'=>$user], 200);
         }else{
             return response()->json(['msg'=>'No se encontro el usuario'], 404);
         }

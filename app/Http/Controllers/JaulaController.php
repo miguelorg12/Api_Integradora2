@@ -9,6 +9,7 @@ use App\Models\Sensor_Jaula;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\SensoresController;
+use Illuminate\Support\Facades\Auth;
 
 class JaulaController extends Controller
 {
@@ -56,7 +57,8 @@ class JaulaController extends Controller
             return response()->json(['msg'=>'No se encontro la jaula'], 404);
         }
     }
-    public function showperUser($id){
+    public function showperUser(){
+        $id = Auth::user()->id;
         $jaulas = Jaula::where('id_user', $id)->get();
         if($jaulas){
             return response()->json(['Jaulas del usuario'=> $jaulas], 200);

@@ -34,6 +34,7 @@ Route::group([
 //Usuarios
 Route::prefix('v1')->group(function () {
     Route::get('users', [UserController::class, 'mostrarid']);
+    Route::put('users/update', [UserController::class, 'update']);
 });
 //Sensores adafruit
 Route::prefix('v1')->group(function () {
@@ -49,7 +50,7 @@ Route::prefix('v1')->group(function () {
 Route::prefix('v1')->group(function () {
     Route::post('jaula', [JaulaController::class, 'store']);
     Route::get('jaula/{id}',[JaulaController::class, 'show'])->where('id', '[0-9]+');
-    Route::get('jaula/user/{id}',[JaulaController::class, 'showperUser'])->where('id', '[0-9]+');
+    Route::get('jaula/user',[JaulaController::class, 'showperUser']);
 });
 
 //Sensores
