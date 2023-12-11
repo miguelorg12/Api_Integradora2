@@ -12,7 +12,7 @@ use App\Models\Sensor_Jaula;
 
 class AdafruitController extends Controller
 {
-    public string $key = 'aio_auXF03sInx0P9MpAMKtmYyetayEa';
+    public string $key = 'aio_UtXo77kPVR1LoCiICU07eJNF7yDP';
     public function __construct()
     {
         $this->middleware('auth:api', ['except' => []]);
