@@ -18,7 +18,7 @@ class AdafruitController extends Controller
     }
 
     public function adafruitSensores($id_jaula){
-        $sensores = ['temperatura', 'humedad', 'luzsensor', 'rpm', 'ultrasonico', 'movimien', 'infrarrojo']; 
+        $sensores = ['temperatura', 'humedad', 'luzsensor', 'rpm', 'movimien','ultrasonico', 'infrarrojo']; 
         $resultados = [];
         foreach ($sensores as $sensor) {
             $response = Http::withHeaders([
