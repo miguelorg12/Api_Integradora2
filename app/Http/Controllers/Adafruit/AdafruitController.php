@@ -17,6 +17,33 @@ class AdafruitController extends Controller
         $this->middleware('auth:api', ['except' => []]);
     }
 
+    public function adafruitSensores($id_jaula){
+        $sensores = ['temperatura', 'humedad', 'luzsensor', 'rpm', 'ultrasonico', 'movimien', 'ultrasonico']; 
+        $resultados = [];
+        foreach ($sensores as $sensor) {
+            $response = Http::withHeaders([
+                'X-AIO-Key' => env('ADAFRUIT_IO_KEY')
+            ])->get("https://io.adafruit.com/api/v2/Emith14/feeds/{$sensor}");
+    
+            if($response->ok()){
+                $data = $response->json();
+                $sensor_db = Sensor::where('sensor_id', $data['id'])->first();
+                $lectura = new Lectura();
+                $sensor_jaula = Sensor_Jaula::where('id_sensor', $sensor_db->id)->where('id_jaula', $id_jaula)->first();
+                $lectura->id_sensor_jaula = $sensor_jaula['id'];
+                $lectura->valor = $data['last_value'];
+                $lectura->Fecha_Hora = now();
+                $lectura->save();
+                $resultados[] = ['Sensor'=>$sensor,'msg'=>'Datos obtenidos con exito', 'last_value' => $data['last_value'], 'id' => $data['id']];
+            }
+            else{
+                $resultados[] = ['Sensor'=>$sensor,'msg'=>'Error al obtener los datos', 'data' => $response->body()];
+            }
+        }
+    
+        return response()->json($resultados);
+    }
+
     public function adafruitTemperatura($id_jaula){
         $response = Http::withHeaders([
             'X-AIO-Key' => env('ADAFRUIT_IO_KEY')
