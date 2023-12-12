@@ -12,7 +12,6 @@ use App\Models\Sensor_Jaula;
 
 class AdafruitController extends Controller
 {
-    public string $key = 'aio_UtXo77kPVR1LoCiICU07eJNF7yDP';
     public function __construct()
     {
         $this->middleware('auth:api', ['except' => []]);
@@ -20,7 +19,7 @@ class AdafruitController extends Controller
 
     public function adafruitTemperatura($id_jaula){
         $response = Http::withHeaders([
-            'X-AIO-Key' => "{$this->key}"
+            'X-AIO-Key' => env('ADAFRUIT_IO_KEY')
         ])->get('https://io.adafruit.com/api/v2/Emith14/feeds/temperatura');
 
         if($response->ok()){
@@ -41,7 +40,7 @@ class AdafruitController extends Controller
 
     public function adafruitHumedad($id_jaula){
         $response = Http::withHeaders([
-            'X-AIO-Key' => "{$this->key}"
+            'X-AIO-Key' => env('ADAFRUIT_IO_KEY')
         ])->get('https://io.adafruit.com/api/v2/Emith14/feeds/humedad');
 
         if($response->ok()){
@@ -62,7 +61,7 @@ class AdafruitController extends Controller
 
     public function adafruitLuz($id_jaula){
         $response = Http::withHeaders([
-            'X-AIO-Key' => "{$this->key}"
+            'X-AIO-Key' => env('ADAFRUIT_IO_KEY')
         ])->get('https://io.adafruit.com/api/v2/Emith14/feeds/luzsensor');
 
         if($response->ok()){
@@ -83,7 +82,7 @@ class AdafruitController extends Controller
 
     public function adafruitMovimiento($id_jaula){
         $response = Http::withHeaders([
-            'X-AIO-Key' => "{$this->key}"
+            'X-AIO-Key' => env('ADAFRUIT_IO_KEY')
         ])->get('https://io.adafruit.com/api/v2/Emith14/feeds/movimien');
 
         if($response->ok()){
@@ -104,7 +103,7 @@ class AdafruitController extends Controller
 
     public function adafruitInfrarojo($id_jaula){
         $response = Http::withHeaders([
-            'X-AIO-Key' => "{$this->key}"
+            'X-AIO-Key' => env('ADAFRUIT_IO_KEY')
         ])->get('https://io.adafruit.com/api/v2/Emith14/feeds/infrarrojo');
 
         if($response->ok()){
@@ -125,7 +124,7 @@ class AdafruitController extends Controller
 
     public function adafruitAcelerometro($id_jaula){
         $response = Http::withHeaders([
-            'X-AIO-Key' => "{$this->key}"
+            'X-AIO-Key' => env('ADAFRUIT_IO_KEY')
         ])->get('https://io.adafruit.com/api/v2/Emith14/feeds/rpm');
 
         if($response->ok()){
@@ -146,7 +145,7 @@ class AdafruitController extends Controller
 
     public function adafruitUltrasonico($id_jaula){
         $response = Http::withHeaders([
-            'X-AIO-Key' => "{$this->key}"
+            'X-AIO-Key' => env('ADAFRUIT_IO_KEY')
         ])->get('https://io.adafruit.com/api/v2/Emith14/feeds/ultrasonico');
 
         if($response->ok()){
