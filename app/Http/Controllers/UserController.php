@@ -81,15 +81,6 @@ class UserController extends Controller
         }
     }
 
-    public function activate($id){
-        $user = User::find($id);
-        if($user){
-            $user -> is_active = true;
-            return response()->json(['user'=>$user], 200);
-        }else{
-            return response()->json(['msg'=>'No se encontro el usuario'], 404);
-        }
-    }
     public function mostrarid(){
         $user = Auth::user();
         return response()->json(['id'=> $user -> id], 200);

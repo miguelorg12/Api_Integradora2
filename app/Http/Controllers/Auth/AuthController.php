@@ -7,13 +7,16 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use App\Mail\ValidatorEmail;
+use Illuminate\Support\Facades\URL;
 
 class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register', 'activate']]);
     }
 
     /**
@@ -62,10 +65,60 @@ class AuthController extends Controller
         $user -> ApM = $request->ApM;
         $user -> password = Hash::make($request->password);
         $user->save();
-        if(!$token = Auth::attempt($request->only('email','password'))){
-            return response()->json(['msg' => 'Error al crear el usuario'], 401);
-        }
-        return response()->json(['msg' => 'Usuario creado con exito','user'=>$user], 200);
+        $signed_route = URL::temporarySignedRoute(
+            'activate', 
+            now()->addMinutes(30), 
+            ['user' => $user->id]);
+        Mail::to($request->email)->send(new ValidatorEmail($signed_route));
+        return response()->json(['msg' => 'Registro exitoso, revisar su correo','user'=>$user], 200);
+    }
+    public function activate(User $user){
+        $user -> is_active = true;
+        $user -> save();
+        return '<!DOCTYPE html>
+        <html>
+        <head>
+            <title>Activar cuenta</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    background-color: #f2f2f2;
+                    padding: 20px;
+                }
+        
+                .container {
+                    max-width: 400px;
+                    margin: 0 auto;
+                    background-color: #fff;
+                    padding: 20px;
+                    border-radius: 10px;
+                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                }
+        
+                h1 {
+                    color: #4CAF50;
+                    text-align: center;
+                }
+        
+                p {
+                    font-size: 18px;
+                    line-height: 1.6;
+                }
+        
+                .hamster-image {
+                    display: block;
+                    margin: 0 auto;
+                    width: 50%;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <h1>¡Cuenta activada con éxito!</h1>
+                <p>¡Estamos contentos de tenerte con nosotros! Ya puedes disfrutar de la app.</p>
+            </div>
+        </body>
+        </html>';
     }
 
     public function respondWithToken($token){

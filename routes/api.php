@@ -25,11 +25,12 @@ Route::group([
     'middleware' => 'api',
     'prefix' => 'auth'
 ], function ($router) {
-    Route::post('login', [AuthController::class, 'login']);
+    Route::post('login', [AuthController::class, 'login'])->middleware('verificacioncuenta');
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::post('me', [AuthController::class, 'me']);                  
     Route::post('register', [AuthController::class, 'register']);
+    Route::get('activate/{user}', [AuthController::class, 'activate'])->name('activate')->middleware('signed');
 });
 //Usuarios
 Route::prefix('v1')->group(function () {
