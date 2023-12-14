@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Http;
 use App\Models\Lectura;
+use GuzzleHttp\Client;
 use App\Models\Sensor;
 use App\Models\Sensor_Jaula;
 
@@ -14,7 +15,7 @@ class AdafruitController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => []]);
+        $this->middleware('auth:api', ['except' => ['controlLuces', 'led']]);
     }
 
     public function adafruitSensores($id_jaula){
@@ -189,5 +190,36 @@ class AdafruitController extends Controller
         else{
         return response()->json(['msg'=>'Error al obtener los datos', 'data' => $response->body()], $response->status());
         }
+    }
+    public function controlLuces()
+    {
+        $response = Http::withHeaders([
+        'X-AIO-KEY' => env('ADAFRUIT_IO_KEY')
+        ])->post('https://io.adafruit.com/api/v2/Emith14/feeds/yajala/data',
+        ["value" => "1"]);
+        if($response->ok()){
+            return response()->json(['msg'=>'Datos enviados con exito', 'data' => $response->body()], $response->status());
+        }
+        else{
+            return response()->json(['msg'=>'Error al enviar los datos', 'data' => $response->body()], $response->status());
+        }
+    }
+    public function led(){
+        
+        $response = Http::withHeaders([
+            'X-AIO-KEY'=> env('ADAFRUIT_IO_KEY')
+        ])->post('https://io.adafruit.com/api/v2/Emith14/feeds/yajala/data',["value"=>"1"]);
+        if($response->ok()){
+            return response()->json([
+                "msg"=>"No mames emith",
+                "data"=>$response->json()
+            ],200);
+        }else{
+            return response()->json([
+                "msg"=>"kevin joto",
+                "data"=>$response->body()
+            ],$response->status());
+        }
+    
     }
 }

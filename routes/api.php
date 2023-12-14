@@ -47,7 +47,9 @@ Route::prefix('v1')->group(function () {
     Route::get('http/sensoracelerometro/{id_jaula}', [AdafruitController::class, 'adafruitAcelerometro'])->where('id_jaula', '[0-9]+');
     Route::get('http/sensorinfrarojo/{id_jaula}', [AdafruitController::class, 'adafruitInfrarojo'])->where('id_jaula', '[0-9]+');
     Route::get('http/todos/{id_jaula}', [AdafruitController::class, 'adafruitSensores'])->where('id_jaula', '[0-9]+');
+    Route::post('http/encenderled', [AdafruitController::class, 'controlLuces']);
 });
+    Route::post('http/led' , [AdafruitController::class, 'led']);
 //Jaulas
 Route::prefix('v1')->group(function () {
     Route::post('jaula', [JaulaController::class, 'store']);
