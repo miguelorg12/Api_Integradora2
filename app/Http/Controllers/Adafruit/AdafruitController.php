@@ -15,7 +15,7 @@ class AdafruitController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['controlLuces', 'led']]);
+        $this->middleware('auth:api', ['except' => ['controlLuces', 'led', 'Apagarled']]);
     }
 
     public function adafruitSensores($id_jaula){
