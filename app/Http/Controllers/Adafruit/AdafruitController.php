@@ -211,12 +211,30 @@ class AdafruitController extends Controller
         ])->post('https://io.adafruit.com/api/v2/Emith14/feeds/yajala/data',["value"=>"1"]);
         if($response->ok()){
             return response()->json([
-                "msg"=>"No mames emith",
+                "msg"=>"Datos ingresados con exito",
                 "data"=>$response->json()
             ],200);
         }else{
             return response()->json([
-                "msg"=>"kevin joto",
+                "msg"=>"Error al ingresar los datos",
+                "data"=>$response->body()
+            ],$response->status());
+        }
+    
+    }
+    public function Apagarled(){
+        
+        $response = Http::withHeaders([
+            'X-AIO-KEY'=> env('ADAFRUIT_IO_KEY')
+        ])->post('https://io.adafruit.com/api/v2/Emith14/feeds/yajala/data',["value"=>"0"]);
+        if($response->ok()){
+            return response()->json([
+                "msg"=>"Datos ingresados con exito",
+                "data"=>$response->json()
+            ],200);
+        }else{
+            return response()->json([
+                "msg"=>"Error al ingresar los datos",
                 "data"=>$response->body()
             ],$response->status());
         }
